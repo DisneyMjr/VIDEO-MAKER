@@ -62,6 +62,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential pkg-config libasound2-dev libudev-dev libx11-dev libxcb1-dev libxkbcommon-dev libwayland-dev libgl1-mesa-dev libvulkan-dev libfontconfig1-dev libfreetype6-dev zsync curl
+      - name: Configurar Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
       - name: Instalar nfpm
         run: |
           go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.47.0

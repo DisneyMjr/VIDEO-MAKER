@@ -1,0 +1,6 @@
+# Keep Linux scripts executable by bash on GitHub runners.
+*.sh text eol=lf
+*.bash text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
