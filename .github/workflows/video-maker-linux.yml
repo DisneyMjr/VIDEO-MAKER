@@ -21,6 +21,10 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/goreleaser/nfpm/main/www/docs/install.sh -o /tmp/install-nfpm.sh
           bash /tmp/install-nfpm.sh -b /tmp
           sudo install -m755 /tmp/nfpm /usr/local/bin/nfpm
+      - name: Instalar nfpm
+        run: |
+          go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.47.0
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
       - name: Criar AppImage DEB RPM e TAR.GZ
         env:
           APPIMAGE_EXTRACT_AND_RUN: '1'
