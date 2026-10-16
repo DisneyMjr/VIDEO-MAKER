@@ -41,7 +41,7 @@ use args::{Cli, Launch};
 use chrono::TimeZone;
 use filmcraft_engine::Session;
 use filmcraft_engine::autosave::{AutosaveConfig, default_data_dir};
-use filmcraft_ui_egui::Video MakerApp;
+use filmcraft_ui_egui::FilmcraftApp;
 use serde_json::json;
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -246,7 +246,7 @@ fn app_creator(launch: Launch, graphics: graphics::GraphicsStart, created: Arc<A
                 Err(e) => log::error!("recovery failed: {e}"),
             }
         }
-        let mut app = Video MakerApp::new(session);
+        let mut app = FilmcraftApp::new(session);
         app.graphics_notice = notice;
         if recover == Some(false) {
             app.dialog = None;

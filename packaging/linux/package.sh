@@ -132,7 +132,7 @@ if has appimage; then
   # each AppImage on GitHub Releases. `latest` is the newest published release that is not a
   # pre-release. A fork's builds point at its own releases through GITHUB_REPOSITORY.
   REPO="${GITHUB_REPOSITORY:-storytold/filmcraft}"
-  UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|filmcraft-*-linux-$ARCH.AppImage.zsync"
+  UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|video-maker-*-linux-$ARCH.AppImage.zsync"
   # Extract-and-run: works without FUSE (containers, CI). The output embeds the static runtime,
   # so users don't need libfuse2 either. With zsyncmake on the host (CI installs the zsync
   # package) appimagetool also writes the .zsync, into its working directory, hence the cd.

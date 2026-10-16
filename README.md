@@ -1,57 +1,45 @@
 # Video Maker
 
-**Video Maker** é um editor de vídeo não linear para Windows, Linux e macOS, construído em Rust a partir do projeto de código aberto FilmCraft.
+Editor de vídeo para Windows e Linux, desenvolvido em Rust a partir do código aberto FilmCraft.
 
-## Para que serve
+## Instalar
 
-O Video Maker permite organizar vídeos, imagens e áudio em projetos, montar sequências na linha do tempo, editar cortes e transições, ajustar cores, trabalhar com títulos, legendas, efeitos e áudio e exportar o resultado final.
+Na página **Releases** deste repositório, escolha o pacote adequado:
 
-## Como começar
+- **Windows (64 bits)**: `video-maker-*-windows-x64.msi`. Abra o instalador e siga as etapas.
+- **Windows portátil**: `video-maker-*-windows-x64-portable.zip`. Extraia e execute `filmcraft.exe`.
+- **Linux AppImage**: baixe `video-maker-*-linux-x86_64.AppImage`, marque como executável (`chmod +x arquivo.AppImage`) e execute.
+- **Linux Debian/Ubuntu/Mint**: instale o pacote `.deb` com `sudo apt install ./arquivo.deb`.
+- **Linux Fedora**: instale o `.rpm` com `sudo dnf install ./arquivo.rpm`.
+- **Linux TAR.GZ**: extraia o conteúdo e consulte o `install.sh` incluído.
 
-1. Instale o programa usando o pacote adequado ao seu sistema operacional.
-2. Abra **Video Maker** e crie um projeto.
-3. Importe os arquivos de vídeo, áudio ou imagem pelo painel de mídia.
-4. Arraste os arquivos para a linha do tempo e organize a sequência.
-5. Use as ferramentas de corte, ajuste e transição para montar o vídeo.
-6. Abra os painéis de cor, efeitos, títulos ou áudio para refinar o projeto.
-7. Salve o projeto frequentemente e use **Exportar** para gerar o vídeo final.
+Os executáveis ainda utilizam internamente o nome `filmcraft` por compatibilidade técnica. A interface e o instalador são identificados como **Video Maker**.
 
-## Principais áreas
+## Como usar
 
-- **Projeto / mídia:** arquivos importados e organização por pastas.
-- **Monitor de origem:** pré-visualização de um arquivo antes de inserir na edição.
-- **Monitor do programa:** pré-visualização do resultado da sequência.
-- **Linha do tempo:** várias trilhas de vídeo e áudio, cortes, transições e marcadores.
-- **Efeitos e cor:** ajustes visuais e controles aplicáveis aos clipes.
-- **Áudio:** níveis, mixagem e acompanhamento do som.
-- **Exportação:** configurações do arquivo final, conforme formatos suportados pela compilação.
+1. Abra o Video Maker e crie um novo projeto.
+2. Importe vídeos, imagens e trilhas de áudio pelo painel de mídia.
+3. Arraste os arquivos para a linha do tempo.
+4. Ajuste cortes e a posição dos clipes, adicione transições e títulos conforme os recursos disponíveis.
+5. Use os painéis de efeitos, cor e áudio para refinar a edição.
+6. Salve o projeto e exporte o vídeo pelo menu de exportação.
 
-## Arquivos e compatibilidade
+O suporte a formatos e efeitos depende da versão compilada e das capacidades do dispositivo. Faça um teste curto de exportação antes de iniciar um projeto importante.
 
-As opções de importação e exportação variam conforme o formato, o sistema e as funções disponíveis na versão instalada. Confirme as opções de codec na janela de importação ou exportação do próprio programa antes de iniciar um trabalho importante.
+## Publicar nova versão
 
-## Instaladores
+1. Atualize `version` em `[workspace.package]` no `Cargo.toml` e sincronize o `Cargo.lock`.
+2. Faça commit e `git push` na branch `main`.
+3. Abra **Actions → Publicar Video Maker** e execute para a versão correspondente.
+4. Após Windows e Linux compilarem sem erros, os pacotes serão anexados à página **Releases**.
+5. Quem já instalou deve baixar e executar o novo instalador. Enviar `git push` não atualiza automaticamente instalações existentes.
 
-- **Windows:** use um instalador `.msi` publicado para a versão.
-- **Linux:** use `.AppImage`, `.deb` ou `.rpm` conforme a distribuição e os pacotes disponíveis.
-- **macOS:** utilize um pacote de instalação compatível com seu sistema, quando disponibilizado.
+## Desenvolvimento
 
-Os arquivos neste repositório são **código-fonte**. A geração de instaladores exige compilar o projeto; baixar o ZIP do código não instala o programa.
-
-## Compilar a partir do código-fonte
-
-É necessário instalar Rust e as dependências nativas exigidas pelo projeto. Na raiz do repositório, execute:
+Com o Rust correspondente à versão informada no projeto:
 
 ```bash
-cargo build --release -p filmcraft
+cargo build --release --locked -p filmcraft -p filmcraft-cli
 ```
 
-O pacote e o executável internos continuam com o nome `filmcraft` para preservar a estrutura de compilação. O nome mostrado ao usuário é **Video Maker**.
-
-## Limitações
-
-O software está em desenvolvimento. Alguns recursos e formatos podem não estar totalmente disponíveis ou podem exigir dependências adicionais. Teste suas exportações antes de usar em projetos de produção.
-
-## Licenças e créditos
-
-Video Maker é uma personalização do projeto original FilmCraft. As licenças e créditos de autores e bibliotecas permanecem nos arquivos `LICENSE-MIT`, `LICENSE-APACHE`, `NOTICE` e `ATTRIBUTION.md`.
+Consulte `GUIA-RELEASE.md` para detalhes de compilação e publicação. As licenças e atribuições dos autores originais permanecem nos arquivos legais do projeto.
