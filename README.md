@@ -1,6 +1,6 @@
 # Video Maker
 
-Editor de vídeo para Windows e Linux, desenvolvido em Rust a partir do código aberto FilmCraft.
+Editor de vídeo para Windows e Linux, desenvolvido em Rust por DisneyMkt.
 
 ## Instalar
 
