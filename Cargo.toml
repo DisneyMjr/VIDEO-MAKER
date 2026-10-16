@@ -12,6 +12,7 @@ repository = "https://github.com/storytold/filmcraft"
 
 [workspace.dependencies]
 # internal
+crc32fast = "1.4"
 filmcraft-time = { path = "crates/time" }
 filmcraft-geom = { path = "crates/geom" }
 filmcraft-color = { path = "crates/color" }
