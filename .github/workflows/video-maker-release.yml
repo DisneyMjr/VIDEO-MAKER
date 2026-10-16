@@ -64,8 +64,8 @@ jobs:
           sudo apt-get install -y build-essential pkg-config libasound2-dev libudev-dev libx11-dev libxcb1-dev libxkbcommon-dev libwayland-dev libgl1-mesa-dev libvulkan-dev libfontconfig1-dev libfreetype6-dev zsync curl
       - name: nfpm
         run: |
-          curl -fsSL https://raw.githubusercontent.com/goreleaser/nfpm/main/www/docs/install.sh -o /tmp/install-nfpm.sh
-          bash /tmp/install-nfpm.sh -b /tmp
+          go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.47.0
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
           sudo install -m755 /tmp/nfpm /usr/local/bin/nfpm
       - name: Gerar Linux
         env:
