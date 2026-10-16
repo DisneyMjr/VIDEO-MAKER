@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Video Maker MSI (WiX Toolset v5: `dotnet tool install -g wix`). Built by package.ps1:
+
+    wix build filmcraft.wxs -arch x64 -d Version=1.2.3 -d BinDir=... -d IconPath=... -o out.msi
+
+  Per-machine install into Program Files and a Start Menu shortcut. No file associations.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package
+      Name="Video Maker"
+      Manufacturer="Video Maker"
+      Version="$(var.Version)"
+      UpgradeCode="9982FE8F-9CD1-5387-9C72-FBE6F00B2C5B"
+      Scope="perMachine"
+      Compressed="yes"
+      Language="1033">
+    <SummaryInformation Description="Video Maker video editor" Manufacturer="Video Maker" />
+    <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
+         (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
+    <MajorUpgrade AllowSameVersionUpgrades="yes"
+        DowngradeErrorMessage="A newer version of Video Maker is already installed." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <Icon Id="FilmcraftIcon.ico" SourceFile="$(var.IconPath)" />
+    <Property Id="ARPPRODUCTICON" Value="FilmcraftIcon.ico" />
+    <Property Id="ARPURLINFOABOUT" Value="https://instagram.com/disneymkt" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://instagram.com/disneymkt" />
+    <Property Id="ARPHELPLINK" Value="https://instagram.com/disneymkt" />
+
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLFOLDER" Name="Video Maker" />
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder" />
+
+    <Feature Id="Main" Title="Video Maker" Level="1">
+      <ComponentGroupRef Id="FilmcraftFiles" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+    <ComponentGroup Id="FilmcraftFiles" Directory="INSTALLFOLDER">
+      <Component Id="FilmcraftApp" Guid="57CE7A1C-2C78-5EA9-B7E2-8013249AF136">
+        <File Id="FilmcraftExe" Source="$(var.BinDir)\filmcraft.exe" KeyPath="yes">
+          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="Video Maker"
+              Description="Video Maker video editor" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
+              Icon="FilmcraftIcon.ico" IconIndex="0" />
+        </File>
+
+        <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\filmcraft.exe" Value="[#FilmcraftExe]" Type="string" />
+      </Component>
+
+      <Component Id="FilmcraftCli">
+        <File Id="FilmcraftCliExe" Source="$(var.BinDir)\filmcraft-cli.exe" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
